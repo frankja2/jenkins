@@ -22,13 +22,17 @@ pipeline {
         stage('Run Maven in Docker') {
             steps {
                 script {
-                    // Get the current Jenkins workspace path
-                    def workspacePath = pwd()
+                    // Create a temporary writable directory in /tmp
+                    def tempDir = "/tmp/jenkins-workspace"
+                    sh "mkdir -p ${tempDir}"
 
-                    // Run a Docker container with the workspace mounted
-                    docker.image('bash:3.2.57').inside("-v ${workspacePath}:${workspacePath}:ro") {
+                    // Copy the contents of the workspace to the temporary directory
+                    sh "cp -r ${pwd()}/* ${tempDir}/"
+
+                    // Run a Docker container with the temporary directory mounted
+                    docker.image('bash:3.2.57').inside("-v ${tempDir}:${tempDir}") {
                         // Change directory to where the code is mounted
-                        dir("${workspacePath}") {
+                        dir("${tempDir}") {
                             // Print the current directory inside the container
                             sh 'pwd'
 
