@@ -4,8 +4,18 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                // Checkout code from the GitHub repository
-                git 'https://github.com/frankja2/jenkins.git'
+                // Checkout code from the repository
+                checkout scm
+            }
+        }
+        stage('Build and Deploy with Docker') {
+            steps {
+                script {
+                    sh '''
+                    echo "Contents of the Jenkins workspace:"
+                    ls -la
+                    '''                   
+                }
             }
         }
         stage('Run Maven in Docker') {
@@ -16,11 +26,11 @@ pipeline {
                         // Change directory to where the code is mounted
                         dir('/app') {
                             // Execute Maven deploy inside the Docker container
-                            sh 'ls -ltrh'
+                            sh 'ls -ltrha'
                         }
                     }
                 }
             }
-        }
+        }        
     }
 }
