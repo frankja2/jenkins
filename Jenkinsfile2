@@ -23,7 +23,7 @@ pipeline {
                 script {
                     def workspacePath = "/tmp/jenkins-workspace"
                     // Run an existing Docker container with the repo mounted
-                    docker.image('docker pull bash:3.2.57').inside("-v ${workspacePath}:/app") {
+                    docker.image('bash:3.2.57').inside("-v ${workspacePath}:/app") {
                         // Change directory to where the code is mounted
                         dir('/app') {
                             // Execute Maven deploy inside the Docker container
