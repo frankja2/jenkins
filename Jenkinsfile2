@@ -8,9 +8,10 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Build and Deploy with Docker') {
+        stage('Display Workspace Contents') {
             steps {
                 script {
+                    // Display the contents of the Jenkins workspace
                     sh '''
                     echo "Contents of the Jenkins workspace:"
                     ls -la
@@ -21,13 +22,18 @@ pipeline {
         stage('Run Maven in Docker') {
             steps {
                 script {
-                    def workspacePath = "/tmp/jenkins-workspace"
-                    // Run an existing Docker container with the repo mounted
-                    docker.image('bash:3.2.57') {
+                    // Get the current Jenkins workspace path
+                    def workspacePath = pwd()
+
+                    // Run a Docker container with the workspace mounted
+                    docker.image('bash:3.2.57').inside("-v ${workspacePath}:${workspacePath}") {
                         // Change directory to where the code is mounted
-                        {
-                            // Execute Maven deploy inside the Docker container
+                        dir("${workspacePath}") {
+                            // Print the current directory inside the container
                             sh 'pwd'
+
+                            // List the files in the directory to verify the mount
+                            sh 'ls -la'
                         }
                     }
                 }
