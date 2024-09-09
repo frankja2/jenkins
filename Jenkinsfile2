@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 // Checkout code from the repository
-                checkout scm
+                git url: 'https://github.com/frankja2/test2.git'
             }
         }
         stage('Display Workspace Contents') {
