@@ -27,7 +27,7 @@ pipeline {
                         // Change directory to where the code is mounted
                         dir('/app') {
                             // Execute Maven deploy inside the Docker container
-                            sh 'ls -ltrha'
+                            sh 'pwd'
                         }
                     }
                 }
