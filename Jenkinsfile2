@@ -23,7 +23,7 @@ pipeline {
             steps {
                 script {
                     docker.image('node:20.17.0-alpine3.20').inside {
-                        sh 'node --version'
+                        sh 'ls -ltrha'
                     }
                 }
             }
