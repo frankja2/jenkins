@@ -17,6 +17,15 @@ pipeline {
                     '''                   
                 }
             }
+        }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build Docker image
+                    // Assumes Dockerfile is in the root of the workspace
+                    docker.build('my-docker-image')
+                }
+            }
         }        
     }
 }
