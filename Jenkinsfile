@@ -8,5 +8,15 @@ pipeline {
                 checkout scm
             }
         }
+        stage('Build and Deploy with Docker') {
+            steps {
+                script {
+                    sh '''
+                    echo "Contents of the Jenkins workspace:"
+                    ls -la
+                    '''                   
+                }
+            }
+        }        
     }
 }
