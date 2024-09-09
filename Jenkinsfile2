@@ -22,23 +22,8 @@ pipeline {
         stage('Run Maven in Docker') {
             steps {
                 script {
-                    // Create a temporary writable directory in /tmp
-                    def tempDir = "/tmp/jenkins-workspace"
-                    sh "mkdir -p ${tempDir}"
-
-                    // Copy the contents of the workspace to the temporary directory
-                    sh "cp -r ${pwd()}/* ${tempDir}/"
-
-                    // Run a Docker container with the temporary directory mounted
-                    docker.image('bash:3.2.57').inside("-v ${tempDir}:${tempDir}") {
-                        // Change directory to where the code is mounted
-                        dir("${tempDir}") {
-                            // Print the current directory inside the container
-                            sh 'pwd'
-
-                            // List the files in the directory to verify the mount
-                            sh 'ls -la'
-                        }
+                    docker.image('node:20.17.0-alpine3.20').inside {
+                        sh 'node --version'
                     }
                 }
             }
