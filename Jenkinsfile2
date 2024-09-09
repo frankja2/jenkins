@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                // Checkout code from the GitHub repository
+                git 'https://github.com/frankja2/jenkins.git'
+            }
+        }
+        stage('Run Maven in Docker') {
+            steps {
+                script {
+                    // Run an existing Docker container with the repo mounted
+                    docker.image('my_maven:v1').inside('-v ${pwd()}:/app') {
+                        // Change directory to where the code is mounted
+                        dir('/app') {
+                            // Execute Maven deploy inside the Docker container
+                            sh 'ls -ltrh'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
