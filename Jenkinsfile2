@@ -22,7 +22,7 @@ pipeline {
         stage('Run Maven in Docker') {
             steps {
                 script {
-                    docker.image('node:20.17.0-alpine3.20').inside {
+                    docker.image('my_maven:v1').inside {
                         sh 'ls -ltrha'
                         sh 'hostname'
                         sh 'ip a'
