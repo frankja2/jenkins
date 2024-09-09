@@ -21,7 +21,7 @@ pipeline {
         stage('Run Maven in Docker') {
             steps {
                 script {
-                    def workspacePath = pwd()
+                    def workspacePath = /tmp/jenkins-workspace
                     // Run an existing Docker container with the repo mounted
                     docker.image('my_maven:v1').inside("-v ${workspacePath}:/app") {
                         // Change directory to where the code is mounted
