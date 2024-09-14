@@ -9,7 +9,7 @@ pipeline {
             }
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'jenkins', keyFileVariable: 'SSH_KEY')]) {
-                    sh 'ssh -i $SSH_KEY ubuntu@130.61.34.16'
+                    sh 'ssh -o StrictHostKeyChecking=no -i $SSH_KEY ubuntu@130.61.34.16'
                 }
             }
         }
