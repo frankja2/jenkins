@@ -5,11 +5,11 @@ pipeline {
             agent {
                 label 'linux' // Use Linux nodes with Docker installed
                 docker {
-                    image 'node:20.17.0-alpine3.20'
+                    image 'ubuntu:24.04'
                 }
             }
             steps {
-                sh 'node --version'
+                sh 'ssh'
             }
         }
     }
