@@ -3,7 +3,6 @@ pipeline {
     stages {
         stage('Run in Docker') {
             agent {
-                label 'linux' // Use Linux nodes with Docker installed
                 docker {
                     image 'ubuntu:24.04'
                 }
