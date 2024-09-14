@@ -4,7 +4,7 @@ pipeline {
         stage('Run in Docker') {
             agent {
                 docker {
-                    image 'ubuntu:24.04'
+                    image 'registry-gitlab.goodylabs.com/krka/singlepill-api:v2'
                 }
             }
             steps {
