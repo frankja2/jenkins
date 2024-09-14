@@ -1,34 +1,12 @@
 pipeline {
-    agent any
-
+    agent {
+        docker { image 'node:20.17.0-alpine3.20' }
+    }
     stages {
-        stage('Checkout Code') {
+        stage('Test') {
             steps {
-                // Checkout code from the repository
-                git url: 'https://github.com/frankja2/test2.git', branch: 'main'
+                sh 'node --version'
             }
         }
-        stage('Display Workspace Contents') {
-            steps {
-                script {
-                    // Display the contents of the Jenkins workspace
-                    sh '''
-                    echo "Contents of the Jenkins workspace:"
-                    ls -la
-                    '''                   
-                }
-            }
-        }
-        stage('Run Maven in Docker') {
-            steps {
-                script {
-                    docker.image('my_maven:v1').inside {
-                        sh 'ls -ltrha'
-                        sh 'hostname'
-                        sh 'ip a'
-                    }
-                }
-            }
-        }        
     }
 }
