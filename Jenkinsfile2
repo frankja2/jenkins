@@ -1,10 +1,13 @@
 pipeline {
-    agent {
-        label 'linux' // Ensure this label is used for your Linux nodes
-        docker { image 'node:20.17.0-alpine3.20' }
-    }
+    agent none
     stages {
-        stage('Test') {
+        stage('Run in Docker') {
+            agent {
+                label 'linux' // Use Linux nodes with Docker installed
+                docker {
+                    image 'node:20.17.0-alpine3.20'
+                }
+            }
             steps {
                 sh 'node --version'
             }
