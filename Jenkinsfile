@@ -33,5 +33,5 @@ pipeline {
 
         pizda        
     }
-}gowno
-zmiananatest1
+}gownopizda
+zmiananatest2zmiananatest1
