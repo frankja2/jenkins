@@ -25,7 +25,12 @@ pipeline {
                     // Assumes Dockerfile is in the root of the workspace
                     docker.build('my-docker-image')
                 }
-            }
-        }        
+            }pizda
+        }pizda
+
+
+
+
+        pizda        
     }
-}
+}gowno
