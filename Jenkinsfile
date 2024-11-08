@@ -34,3 +34,4 @@ pipeline {
         pizda        
     }
 }gowno
+zmiananatest1
